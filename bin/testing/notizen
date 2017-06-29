@@ -4,8 +4,10 @@ Bei jeder Messung zu messende Werte:
 * Tachostand
 
 zu berechnende Werte:
-* gesamtTachoStand seit letztem Nullen (Wenn ein Balken voll ist, muss der gesamtTachStand auf Null)
+* gesamtTachoStand seit letztem Nullen (Wenn ein Balken voll ist, muss der gesamtTachoStand auf Null)
 * Zeit in ms seit Balkenanfang
+
+* Ultraschallsensor Rücklichter anmachen am Anfang, und ausmachen nach erfolgter Gesamtmessung
 
 #########################
 
@@ -14,7 +16,7 @@ Konfiguration:
 * balkenlängeTacho
 
 Barcode:
-* 0..* Balken
+* 0..* Ziffern
 
 Ziffernobjekt:
 * balken1 = s/w

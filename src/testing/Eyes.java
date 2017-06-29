@@ -13,14 +13,14 @@ public class Eyes implements Runnable {
 		while(true){
 			augenMotor.forward();// von vorne auf den Drehmotor geguckt im Uhrzeigersinn
 			try{
-			Thread.sleep(500);
+			Thread.sleep(2500);
 			} catch(InterruptedException e) {
 //				running = false;
 				break;
 			}
 			augenMotor.backward();// von vorne auf den Drehmotor geguckt gegen Uhrzeigersinn
 			try{
-			Thread.sleep(500);
+			Thread.sleep(2500);
 			} catch(InterruptedException e) {
 //				running = false;
 				break;
