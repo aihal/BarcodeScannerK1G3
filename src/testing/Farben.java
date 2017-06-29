@@ -26,6 +26,8 @@ public class Farben {
 	}
 
 	public static float[] missWerte(EV3ColorSensor hs, int anzahl) {
+//		FIXME: Statt einfach stumpf jedes mal eine ms zu warten, müssen wir hier
+//		stattdessen while(currentZeit < startZeit+balkenDauer){jedes Mal ein paar Messungen und dann wieder gucken
 		float[] werte = new float[anzahl];
 		for(int i = 0; i < anzahl; i++){
 			hs.fetchSample(werte, i);

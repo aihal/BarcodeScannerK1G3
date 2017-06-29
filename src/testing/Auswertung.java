@@ -5,7 +5,7 @@ import lejos.utility.Delay;
 
 public class Auswertung {
 
-	public static long startZifferAuswertung(EV3ColorSensor hs) {
+	public static int startZifferAuswertung(EV3ColorSensor hs) {
 //		aktuelle Startfarbe bestimmen
 		float[] werte = new float[20];
 		werte = Farben.missWerte(hs, 20);
@@ -63,14 +63,23 @@ public class Auswertung {
 		}
 		long balkenDauer = (balkenDauer1 + balkenDauer2 + balkenDauer3) / 3;
 		Delay.msDelay(balkenDauer); // Hiernach haben wir das Ende des letzten Balkens vom Startmuster erreicht
-		return balkenDauer;
+//		TODO wenn hier aus irgendeinem Grund eine sehr große Zahl entstünde, was passiert beim casten to int?
+		return (int) balkenDauer;
 	}
 
-	public static Ziffer werteEineZifferAus(EV3ColorSensor hs, long balkenDauer) {
-//		NOTE: Ein Barcode, der aus ganz vielen Nullen nacheinander besteht, 
-//		wird vollkommen weiß sein über viele Balken hinweg... man kann also leider keine Abbruchbedingung machen wie
-//		Wenn 5 gleichfarbige Balken überfahren wurde oops
-		return null;
+	public static Ziffer werteEineZifferAus(EV3ColorSensor hs, int d) {
+		int balken1 = 1;
+		int balken2 = 1;
+		int balken3 = 1;
+		int balken4 = 1;
+		
+		
+		balken1 = Farben.getFarbe( Farben.missWerte(hs, d) );
+		balken2 = Farben.getFarbe( Farben.missWerte(hs, d) );
+		balken3 = Farben.getFarbe( Farben.missWerte(hs, d) );
+		balken4 = Farben.getFarbe( Farben.missWerte(hs, d) );
+		Musik.beep();
+		return new Ziffer(balken1, balken2, balken3, balken4);
 	}
 
 }

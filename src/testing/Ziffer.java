@@ -38,6 +38,7 @@ public class Ziffer {
 			this.zahlWert = 0;
 		}else {
 			// Error, Zahl gibt es nicht
+			this.zahlWert = 0;
 		}
 	}
 	public boolean anfang() {
