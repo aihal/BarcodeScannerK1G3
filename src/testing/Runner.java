@@ -1,5 +1,6 @@
 package testing;
 import java.util.*;
+import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 import lejos.utility.Delay;
 import lejos.hardware.port.SensorPort;
@@ -24,71 +25,23 @@ public class Runner {
 		Thread eyesWorker = new Thread(eyesTask);
 		eyesWorker.setName("Loopy!");
 
-//		aktuelle Startfarbe bestimmen
-		float[] werte = new float[20];
-		for(int i = 0; i < 20; i++){
-			hs.fetchSample(werte, i);
-			Delay.msDelay(1);
-		}
-		int aktuelleFarbe = Farben.getFarbe(werte);
+		
+		Barcode barcode = new Barcode();
 //		GoGoGo!
 		brumm.fahre();
 		eyesWorker.start();
 //		musikWorker.start();
 		
-//		Kalibrierung (das Auslesen des Startmusters
-		long startZeit = System.currentTimeMillis();
-		long endeZeit = System.currentTimeMillis();
-		long balkenDauer1 = 0l;
-		long balkenDauer2 = 0l;
-		long balkenDauer3 = 0l;
-		boolean weiter = true;
-		while(weiter){
-			werte = Farben.missWerte(hs, 20);
-			int gemesseneFarbe = Farben.getFarbe(werte);
-			if(gemesseneFarbe != aktuelleFarbe){ // Wir haben den Anfang des ersten Balkens erreicht
-				aktuelleFarbe = gemesseneFarbe;
-				startZeit = System.currentTimeMillis();
-				weiter = false;
+//		Startmuster auswerten
+		long balkenDauer = Auswertung.startZifferAuswertung(hs);
+		while(!Button.ESCAPE.isDown()){
+			Ziffer z = Auswertung.werteEineZifferAus(hs, balkenDauer);
+			if(!z.ende()){
+				barcode.add(z);
+			}else{
+				break;
 			}
 		}
-		weiter = true;
-		while(weiter){
-			werte = Farben.missWerte(hs, 20);
-			int gemesseneFarbe = Farben.getFarbe(werte);
-			if(gemesseneFarbe != aktuelleFarbe){ // Wir haben das Ende des ersten Balkens erreicht
-				aktuelleFarbe = gemesseneFarbe;
-				endeZeit = System.currentTimeMillis();
-				balkenDauer1 = endeZeit - startZeit;
-				weiter = false;
-			}
-		}
-		weiter = true;
-		startZeit = System.currentTimeMillis(); // Beginn zweiter Balken
-		while(weiter){
-			werte = Farben.missWerte(hs, 20);
-			int gemesseneFarbe = Farben.getFarbe(werte);
-			if(gemesseneFarbe != aktuelleFarbe){ // Wir haben das Ende des zweiten Balkens erreicht
-				aktuelleFarbe = gemesseneFarbe;
-				endeZeit = System.currentTimeMillis();
-				balkenDauer2 = endeZeit - startZeit;
-				weiter = false;
-			}
-		}
-		weiter = true;
-		startZeit = System.currentTimeMillis(); // Beginn dritter Balken
-		while(weiter){
-			werte = Farben.missWerte(hs, 20);
-			int gemesseneFarbe = Farben.getFarbe(werte);
-			if(gemesseneFarbe != aktuelleFarbe){ // Wir haben das Ende des dritten Balkens erreicht
-				aktuelleFarbe = gemesseneFarbe;
-				endeZeit = System.currentTimeMillis();
-				balkenDauer3 = endeZeit - startZeit;
-				weiter = false;
-			}
-		}
-		long balkenDauer = (balkenDauer1 + balkenDauer2 + balkenDauer3) / 3;
-		Delay.msDelay(balkenDauer); // Hiernach haben wir das Ende des letzten Balkens vom Startmuster erreicht
 		
 //		Ende, aufräumen.
 		brumm.stoppe();
@@ -98,10 +51,10 @@ public class Runner {
 //		Ergebnis präsentieren.
 		Musik.beep();
 		LCD.clear();
-		LCD.drawString(String.format("%d", balkenDauer),  0,  0);
+		LCD.drawString(barcode.toString(),  0,  0);
 		Delay.msDelay(15000);
 	}
-
+//####################################################################
 	public static void mainAlt(String[] args) {
 		LCD.clear();
 		LCD.drawString("Moooin!",  3,  3);
