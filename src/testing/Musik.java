@@ -28,7 +28,7 @@ public class Musik implements Runnable {
 	}
 
 	public static void beep() {
-		Sound.playTone(440,  500, 10);
+		Sound.playTone(440,  200, 2);
 	}
 
 }

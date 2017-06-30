@@ -24,4 +24,8 @@ public class Barcode {
 		}
 		return sb.toString();
 	}
+
+	public int length() {
+		return this.ziffern.size();
+	}
 }

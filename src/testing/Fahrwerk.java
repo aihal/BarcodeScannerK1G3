@@ -5,7 +5,7 @@ import lejos.hardware.motor.Motor;
 public class Fahrwerk {
 	private lejos.hardware.motor.NXTRegulatedMotor brummi = Motor.D;
 	public void fahre(){
-		brummi.setSpeed(20);
+		brummi.setSpeed(40);
 		brummi.forward();
 	}
 	public void stoppe(){
