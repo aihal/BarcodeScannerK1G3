@@ -6,9 +6,6 @@ import lejos.utility.Delay;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 
-/**
- * @author Nina Kadenbach, Roberto Gresla, Jonathan Lutze
- */
 public class Runner {
 	public static void main3(String[] args){
 		EV3ColorSensor hs = new EV3ColorSensor(SensorPort.S1);
