@@ -1,7 +1,6 @@
 package testing;
 
 import java.util.*;
-
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.utility.Delay;
@@ -16,8 +15,8 @@ public class Auswertung {
 		long startZeit = System.currentTimeMillis();
 		long endeZeit = System.currentTimeMillis();
 		// Wir nehmen einfach an, dass wir auf weiﬂ/gelb anfangen
-		int aktuelleFarbe = 0;
-		int gemesseneFarbe = 0;
+		int aktuelleFarbe = 1;
+		int gemesseneFarbe = 1;
 		
 		while(weiter){
 			werte = new float[3];
@@ -46,7 +45,6 @@ public class Auswertung {
 			}
 		}
 		balkenDauer = endeZeit - startZeit;
-		LCD.drawInt((int) balkenDauer, 0, 5);
 		while(System.currentTimeMillis() < startZeit + (4 * balkenDauer)){
 			Delay.msDelay(1);
 		}
@@ -174,7 +172,7 @@ public class Auswertung {
 		return new Ziffer(balken[0], balken[1], balken[2], balken[3]);
 	}
 	
-	public static Ziffer werteEineZifferAus(EV3ColorSensor hs, long balkenDauer) {
+	public static Ziffer werteEineZifferAusHalbAlt(EV3ColorSensor hs, long balkenDauer) {
 		int[] balken = new int[4];
 		long startZeit = System.currentTimeMillis();
 		long zielZeit = startZeit + (4 * balkenDauer) - 5; // 5 ms einsparen f¸r die kommende Auswertung?
@@ -197,6 +195,52 @@ public class Auswertung {
 		balken[3] = Farben.getFarbe( werte3 );
 
 //		Musik.beep();
+		LCD.drawInt(balken[0], 0, 0);
+		LCD.drawInt(balken[1], 1, 0);
+		LCD.drawInt(balken[2], 2, 0);
+		LCD.drawInt(balken[3], 3, 0);
+		return new Ziffer(balken[0], balken[1], balken[2], balken[3]);
+	}
+
+	public static Ziffer werteEineZifferAus(EV3ColorSensor hs, long balkenDauer) {
+		int[] balken = new int[4];
+		long startZeit = System.currentTimeMillis();
+		List<Float> werte = new ArrayList<Float>();
+		long balkenEnde1 = startZeit + balkenDauer;
+		long balkenEnde2 = startZeit + 2*balkenDauer;
+		long balkenEnde3 = startZeit + 3*balkenDauer;
+		long balkenEnde4 = startZeit + 4*balkenDauer;
+
+		while(System.currentTimeMillis() < balkenEnde1){
+			werte.add(Farben.missWert(hs));
+			Delay.msDelay(1);
+		}
+		balken[0] = Farben.getFarbe( werte );
+
+		while(System.currentTimeMillis() < balkenEnde2){
+			werte.add(Farben.missWert(hs));
+			Delay.msDelay(1);
+		}
+		balken[1] = Farben.getFarbe( werte );
+
+		while(System.currentTimeMillis() < balkenEnde3){
+			werte.add(Farben.missWert(hs));
+			Delay.msDelay(1);
+		}
+		balken[2] = Farben.getFarbe( werte );
+
+		while(System.currentTimeMillis() < balkenEnde4){
+			werte.add(Farben.missWert(hs));
+			Delay.msDelay(1);
+		}
+		balken[3] = Farben.getFarbe( werte );
+
+
+//		Musik.beep();
+		LCD.drawInt(balken[0], 0, 0);
+		LCD.drawInt(balken[1], 1, 0);
+		LCD.drawInt(balken[2], 2, 0);
+		LCD.drawInt(balken[3], 3, 0);
 		return new Ziffer(balken[0], balken[1], balken[2], balken[3]);
 	}
 

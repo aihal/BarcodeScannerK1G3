@@ -1,5 +1,4 @@
 package testing;
-import java.util.*;
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 import lejos.utility.Delay;
@@ -7,14 +6,15 @@ import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 
 public class Runner {
-	public static void main3(String[] args){
+	public static void main1(String[] args){
 		EV3ColorSensor hs = new EV3ColorSensor(SensorPort.S1);
 		hs.setCurrentMode("Red");
-		int i = Farben.getFarbe(Farben.missWerte(hs, 20));
+		int i = Farben.getFarbe(new float[]{Farben.missWert(hs)});
 		LCD.drawInt(i, 0, 0);
 		hs.close();
-		Delay.msDelay(10000);
+		Delay.msDelay(1000);
 	}
+	
 	public static void main(String[] args){
 		LCD.clear();
 		LCD.drawString("Moooin!",  3,  3);
@@ -37,11 +37,12 @@ public class Runner {
 //		musikWorker.start();
 		
 //		Startmuster auswerten
-		long balkenDauer = Auswertung.startZifferAuswertung(hs);
-		Musik.beep();
+		long balkenDauer = Auswertung.startZifferAuswertungAlt(hs);
+//		Musik.beep();
 //		LCD.clear();
-		LCD.drawString("Fahre...", 0, 0);
+		LCD.drawString("Fahre...", 5, 0);
 		LCD.drawString(String.format("b: %d", balkenDauer), 0, 1);
+		///*
 		while(!Button.ESCAPE.isDown()){
 			Ziffer z = Auswertung.werteEineZifferAus(hs, balkenDauer);
 			barcode.add(z);
@@ -52,18 +53,19 @@ public class Runner {
 				break;
 			}
 		}
+		//*/
 		
 //		Ende, aufräumen.
 		hs.close();
-		brumm.stoppe();
+		brumm.stoppe();brumm.close();
 //		eyesWorker.interrupt();
 //		musikWorker.interrupt();
 		
 //		Ergebnis präsentieren.
 //		Musik.beep();
-		LCD.clear();
-		LCD.drawString(barcode.toString(),  0,  0);
-		Delay.msDelay(15000);
+//		LCD.clear();
+//		LCD.drawString(barcode.toString(),  0,  0);
+		Delay.msDelay(10000);
 	}
 
 }

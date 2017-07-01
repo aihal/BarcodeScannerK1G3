@@ -5,6 +5,13 @@ public class Ziffer {
 	private boolean ende = false;
 	private int zahlWert;
 	
+	/**
+	 * Konstruktor. 
+	 * @param b1 int 0 oder 1 (schwarz oder weiß)
+	 * @param b2 int 0 oder 1 (schwarz oder weiß)
+	 * @param b3 int 0 oder 1 (schwarz oder weiß)
+	 * @param b4 int 0 oder 1 (schwarz oder weiß)
+	 */
 	public Ziffer(int b1, int b2, int b3, int b4){
 		if(b1 == 0 && b2 == 1 && b3 == 0 && b4 == 1){
 			//s w s w -> Anfang
@@ -38,15 +45,29 @@ public class Ziffer {
 			this.zahlWert = 0;
 		}else {
 			// Error, Zahl gibt es nicht
-			this.zahlWert = 0;
+			this.zahlWert = -1;
 		}
 	}
+	
+	/**
+	 * 
+	 * @return boolean true wenn es die Anfangsziffer war.
+	 */
 	public boolean anfang() {
 		return this.anfang;
 	}
+	
+	/**
+	 * 
+	 * @return boolean true wenn es die Endeziffer war.
+	 */
 	public boolean ende() {
 		return this.ende;
 	}
+	
+	/**
+	 * @return String Gibt eine Stringrepräsentation der Ziffer zurück.
+	 */
 	public String toString(){
 		if(this.anfang || this.ende){
 			return "STOP";

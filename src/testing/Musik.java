@@ -27,8 +27,11 @@ public class Musik implements Runnable {
 
 	}
 
+	/**
+	 * Spiele ein einzelnes, leises beep
+	 */
 	public static void beep() {
-		Sound.playTone(440,  200, 2);
+		Sound.playTone(440,  200, 5);
 	}
 
 }
