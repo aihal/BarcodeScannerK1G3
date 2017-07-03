@@ -10,15 +10,17 @@ public class Runner {
 		EV3ColorSensor hs = new EV3ColorSensor(SensorPort.S1);
 		hs.setCurrentMode("Red");
 		int i = Farben.getFarbe(new float[]{Farben.missWert(hs)});
+		float bla = Farben.missWert(hs);
 		LCD.drawInt(i, 0, 0);
+		LCD.drawString( String.format("Wert: %f", bla) , 0, 1);
 		hs.close();
-		Delay.msDelay(1000);
+		Delay.msDelay(2000);
 	}
 	
 	public static void main(String[] args){
 		LCD.clear();
 		LCD.drawString("Moooin!",  3,  3);
-		Fahrwerk brumm = new Fahrwerk();
+		Fahrwerk brumm = new Fahrwerk(30);
 		EV3ColorSensor hs = new EV3ColorSensor(SensorPort.S1);
 		hs.setCurrentMode("Red");
 
@@ -37,23 +39,21 @@ public class Runner {
 //		musikWorker.start();
 		
 //		Startmuster auswerten
-		long balkenDauer = Auswertung.startZifferAuswertungAlt(hs);
+		long balkenDauer = Auswertung.startZifferAuswertung(hs);
 //		Musik.beep();
 //		LCD.clear();
 		LCD.drawString("Fahre...", 5, 0);
 		LCD.drawString(String.format("b: %d", balkenDauer), 0, 1);
-		///*
 		while(!Button.ESCAPE.isDown()){
 			Ziffer z = Auswertung.werteEineZifferAus(hs, balkenDauer);
 			barcode.add(z);
 //			if(z.ende()){
 //				break;
 //			}
-			if(barcode.length() > 0){
+			if(barcode.length() > 1){
 				break;
 			}
 		}
-		//*/
 		
 //		Ende, aufräumen.
 		hs.close();
@@ -64,7 +64,7 @@ public class Runner {
 //		Ergebnis präsentieren.
 //		Musik.beep();
 //		LCD.clear();
-//		LCD.drawString(barcode.toString(),  0,  0);
+		LCD.drawString(barcode.toString(),  0,  6);
 		Delay.msDelay(10000);
 	}
 

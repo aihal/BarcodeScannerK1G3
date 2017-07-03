@@ -11,11 +11,12 @@ public class Fahrwerk {
 	 * @param int speed
 	 */
 	public Fahrwerk(int speed) {
-		brummi.setSpeed(this.speed);
 		this.speed = speed;
+		brummi.setSpeed(this.speed);
 	}
 	
 	public Fahrwerk() {
+		brummi.setSpeed(this.speed);
 	}
 	
 	/**

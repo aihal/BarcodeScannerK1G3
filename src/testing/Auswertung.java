@@ -50,7 +50,8 @@ public class Auswertung {
 		}
 		return balkenDauer;
 	}
-	public static long startZifferAuswertungAlt(EV3ColorSensor hs) {
+	
+	public static long startZifferAuswertung1(EV3ColorSensor hs) {
 		long anfangsZeit = System.currentTimeMillis();
 //		aktuelle Startfarbe bestimmen
 		float[] werte = new float[10];
@@ -155,27 +156,10 @@ public class Auswertung {
 		return balkenDauer;
 	}
 
-	public static Ziffer werteEineZifferAusAlt(EV3ColorSensor hs, int d) {
+	public static Ziffer werteEineZifferAus1(EV3ColorSensor hs, long balkenDauer) {
 		int[] balken = new int[4];
 		long startZeit = System.currentTimeMillis();
-		List<Float> werte;
-		int w = d % 10;
-		for(int i = 0; i < 4; i++){
-			werte = new ArrayList<Float>();
-			while(startZeit + d - 5 > System.currentTimeMillis()){
-				werte.add(Farben.missWert(hs));
-				Delay.msDelay(5);
-			}
-			balken[i] = Farben.getFarbe( werte );
-		}
-		Musik.beep();
-		return new Ziffer(balken[0], balken[1], balken[2], balken[3]);
-	}
-	
-	public static Ziffer werteEineZifferAusHalbAlt(EV3ColorSensor hs, long balkenDauer) {
-		int[] balken = new int[4];
-		long startZeit = System.currentTimeMillis();
-		long zielZeit = startZeit + (4 * balkenDauer) - 5; // 5 ms einsparen für die kommende Auswertung?
+		long zielZeit = startZeit + (4 * balkenDauer);
 		List<Float> werte = new ArrayList<Float>();
 
 		while(System.currentTimeMillis() < zielZeit){
@@ -194,7 +178,6 @@ public class Auswertung {
 		balken[2] = Farben.getFarbe( werte2 );
 		balken[3] = Farben.getFarbe( werte3 );
 
-//		Musik.beep();
 		LCD.drawInt(balken[0], 0, 0);
 		LCD.drawInt(balken[1], 1, 0);
 		LCD.drawInt(balken[2], 2, 0);
