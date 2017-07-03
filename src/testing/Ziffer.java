@@ -16,8 +16,7 @@ public class Ziffer {
 		if(b1 == 0 && b2 == 1 && b3 == 0 && b4 == 1){
 			//s w s w -> Anfang
 			this.anfang = true;
-			this.ende = false;
-			this.zahlWert = 0;
+			this.zahlWert = -2;
 		}else if(b1 == 1 && b2 == 1 && b3 == 1 && b4 == 1){
 			this.zahlWert = 0;
 		} else if(b1 == 0 && b2 == 1 && b3 == 1 && b4 == 1){
@@ -41,8 +40,7 @@ public class Ziffer {
 		}else if(b1 == 1 && b2 == 0 && b3 == 1 && b4 == 0){
 			//w s w s -> Ende
 			this.ende = true;
-			this.anfang = false;
-			this.zahlWert = 0;
+			this.zahlWert = -2;
 		}else {
 			// Error, Zahl gibt es nicht
 			this.zahlWert = -1;
@@ -53,7 +51,7 @@ public class Ziffer {
 	 * 
 	 * @return boolean true wenn es die Anfangsziffer war.
 	 */
-	public boolean anfang() {
+	public boolean istAnfang() {
 		return this.anfang;
 	}
 	
@@ -61,7 +59,7 @@ public class Ziffer {
 	 * 
 	 * @return boolean true wenn es die Endeziffer war.
 	 */
-	public boolean ende() {
+	public boolean istEnde() {
 		return this.ende;
 	}
 	

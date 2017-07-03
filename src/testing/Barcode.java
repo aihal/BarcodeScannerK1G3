@@ -24,11 +24,7 @@ public class Barcode {
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		for(Ziffer z : this.ziffern){
-			if(z.anfang() || z.ende()){
-				
-			}else{
-				sb.append(z.toString());
-			}
+			sb.append(" ").append(z.toString());
 		}
 		return sb.toString();
 	}

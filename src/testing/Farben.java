@@ -4,9 +4,7 @@ import java.util.*;
 import lejos.hardware.sensor.EV3ColorSensor;
 
 public class Farben {
-	// Wert kalibrieren interaktiv zu Beginn? Bin ich dagegen
-	// Der Wert ist 0.5 um 10% Fehler zu erlauben. Eigentlich ist so ab 0.6 wenn der Sensor weiß scannt.
-	private static float weissSchwellwert = 0.55f;
+	private static float weissSchwellwert = 0.4f; // Ab dem Wert und höher -> weiß
 	
 	/**
 	 * Gibt die Farbe in 0 oder 1 aus. Mittelt über alle gegebenen Messwerte.

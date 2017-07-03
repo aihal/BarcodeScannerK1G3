@@ -39,4 +39,19 @@ public class Fahrwerk {
 	public void close() {
 		brummi.close();
 	}
+
+	/**
+	 * Resette den TachoCount (die gefahrene Strecke in Umdregungsgraden)
+	 */
+	public void resetTacho() {
+		brummi.resetTachoCount();
+	}
+	
+	/**
+	 * Lies den Tacho aus (gefahrene Strecke in Umdrehungsgraden)
+	 * @return
+	 */
+	public int liesTacho() {
+		return brummi.getTachoCount();
+	}
 }
