@@ -5,7 +5,7 @@ public class Eyes implements Runnable {
 	@Override
 	public void run(){
 		lejos.hardware.motor.NXTRegulatedMotor augenMotor = Motor.A;
-		augenMotor.setSpeed(200);
+		augenMotor.setSpeed(300);
 		while(true){
 			augenMotor.forward();// von vorne auf den Drehmotor geguckt im Uhrzeigersinn
 			try{

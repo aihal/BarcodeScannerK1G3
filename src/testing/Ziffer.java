@@ -67,8 +67,10 @@ public class Ziffer {
 	 * @return String Gibt eine Stringrepräsentation der Ziffer zurück.
 	 */
 	public String toString(){
-		if(this.anfang || this.ende){
+		if(this.anfang){
 			return "STOP";
+		}else if(this.ende){
+			return "Start";
 		}else{
 			return Integer.toString(this.zahlWert);
 		}

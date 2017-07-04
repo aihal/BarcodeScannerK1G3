@@ -6,13 +6,23 @@ import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 
 public class Runner {
-
 	public static void main(String[] args){
 		LCD.clear();
 		LCD.drawString("Moooin!",  3,  3);
-		Fahrwerk brumm = new Fahrwerk(120);
+		Fahrwerk brumm = new Fahrwerk(90);
 		EV3ColorSensor hs = new EV3ColorSensor(SensorPort.S1);
 		hs.setCurrentMode("Red");
+		
+		Runnable musikTask= new Musik();
+		Thread musikWorker = new Thread(musikTask);
+		musikWorker.setName("Musik");
+		
+		Runnable eyesTask= new Eyes();
+		Thread eyesWorker = new Thread(eyesTask);
+		eyesWorker.setName("Loopy");
+		
+		eyesWorker.start();
+		musikWorker.start();
 
 		Barcode barcode = new Barcode();
 		brumm.fahre();
@@ -23,16 +33,19 @@ public class Runner {
 			Ziffer z = Auswertung.werteEineZifferAus(hs, balkenDauer, brumm);
 			barcode.add(z);
 			LCD.drawString(z.toString(), 0, 0);
-			if(z.istEnde()){
+			if(z.istEnde() || barcode.length() > 20){
 				break;
 			}
 		}
 		hs.close();
+		eyesWorker.interrupt();
+		musikWorker.interrupt();
 		brumm.stoppe();brumm.close();
-		LCD.clear();
-		LCD.drawString(barcode.toString(),  0,  3);
-		LCD.drawString(String.format("balkenDauer: %d", balkenDauer), 0, 4);
-		Delay.msDelay(10000);
-	}
+		Musik.beep();
+		barcode.toDisplay();
 
-}
+		while(!Button.ESCAPE.isDown()){
+			Delay.msDelay(100);
+		}
+	}//Ende main
+}//Ende Runner
