@@ -6,7 +6,9 @@ public class Ziffer {
 	private int zahlWert;
 	
 	/**
-	 * Konstruktor. 
+	 * Konstruktor. Anhand der übergebenen Balkenfarben bestimmen, welche Ziffer gerade ausgelesen wurde.
+	 * Bei Anfang oder Ende auch entsprechend die boolean flag setzen. Wenn die gelesenen Balken unbekannt sind,
+	 * dann setze den Wert auf -1.
 	 * @param b1 int 0 oder 1 (schwarz oder weiß)
 	 * @param b2 int 0 oder 1 (schwarz oder weiß)
 	 * @param b3 int 0 oder 1 (schwarz oder weiß)
@@ -48,29 +50,28 @@ public class Ziffer {
 	}
 	
 	/**
-	 * 
-	 * @return boolean true wenn es die Anfangsziffer war.
+	 * @return <b>boolean</b> true wenn es die Anfangsziffer war.
 	 */
 	public boolean istAnfang() {
 		return this.anfang;
 	}
 	
 	/**
-	 * 
-	 * @return boolean true wenn es die Endeziffer war.
+	 * @return <b>boolean</b> true wenn es die Endeziffer war.
 	 */
 	public boolean istEnde() {
 		return this.ende;
 	}
 	
 	/**
-	 * @return String Gibt eine Stringrepräsentation der Ziffer zurück.
+	 * Gibt den Wert als String zurück. Bei Anfang "<b>A</b>", bei Ende "<b>E</b>".
+	 * @return <b>String</b> Gibt eine Stringrepräsentation der Ziffer zurück.
 	 */
 	public String toString(){
 		if(this.anfang){
-			return "STOP";
+			return "A";
 		}else if(this.ende){
-			return "Start";
+			return "E";
 		}else{
 			return Integer.toString(this.zahlWert);
 		}

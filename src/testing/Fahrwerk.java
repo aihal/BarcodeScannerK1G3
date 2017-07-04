@@ -7,7 +7,7 @@ public class Fahrwerk {
 	private int speed = 25;
 	
 	/**
-	 * 
+	 * Konstruktor mit Geschwindigkeit.
 	 * @param int speed
 	 */
 	public Fahrwerk(int speed) {
@@ -15,6 +15,9 @@ public class Fahrwerk {
 		brummi.setSpeed(this.speed);
 	}
 	
+	/**
+	 * Konstruktor ohne Geschwindigkeit. Setzt den default von 25.
+	 */
 	public Fahrwerk() {
 		brummi.setSpeed(this.speed);
 	}
@@ -49,7 +52,7 @@ public class Fahrwerk {
 	
 	/**
 	 * Lies den Tacho aus (gefahrene Strecke in Umdrehungsgraden)
-	 * @return
+	 * @return int
 	 */
 	public int liesTacho() {
 		return brummi.getTachoCount();

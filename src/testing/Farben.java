@@ -4,12 +4,12 @@ import java.util.*;
 import lejos.hardware.sensor.EV3ColorSensor;
 
 public class Farben {
-	private static float weissSchwellwert = 0.4f; // Ab dem Wert und höher -> weiß
+	private static float weissSchwellwert = 0.45f; // Ab dem Wert und höher -> weiß
 	
 	/**
 	 * Gibt die Farbe in 0 oder 1 aus. Mittelt über alle gegebenen Messwerte.
 	 * @param werte Array mit floating Messwerten vom Sensor
-	 * @return <b>0</b>: Schwarz<br/> <b>1</b>: weiß.
+	 * @return Die Farbe als int:<br/><b>0</b>: Schwarz<br/> <b>1</b>: weiß.
 	 */
 	public static int getFarbe(float[] werte){
 		int out = 0;
@@ -26,7 +26,7 @@ public class Farben {
 	/**
 	 * Overloaded getFarbe(float[]), macht intern einen float[] und ruft dann die andere Methode auf.
 	 * @param werte als List<Float>
-	 * @return int Farbwert (0 oder 1 für schwarz oder weiß).
+	 * @return Die Farbe als int:<br/><b>0</b>: Schwarz<br/> <b>1</b>: weiß.
 	 */
 	public static int getFarbe(List<Float> werte){
 		float[] r = new float[werte.size()];
@@ -39,7 +39,7 @@ public class Farben {
 	/**
 	 * Macht eine einzelne Helligkeitsmessung und gibt diese zurück.
 	 * @param hs Eine Instanz vom EV3ColorSensor.
-	 * @return float ein einzelner Messwert vom Sensor.
+	 * @return <b>float</b> ein einzelner Messwert vom Sensor.
 	 */
 	public static float missWert(EV3ColorSensor hs) {
 		float[] wert = new float[1];

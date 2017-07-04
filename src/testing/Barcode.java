@@ -6,6 +6,9 @@ import lejos.hardware.lcd.LCD;
 public class Barcode {
 	private List<Ziffer> ziffern;
 
+	/**
+	 * Konstruktor.
+	 */
 	public Barcode() {
 		this.ziffern = new ArrayList<Ziffer>();
 	}
@@ -19,12 +22,12 @@ public class Barcode {
 	}
 	
 	/**
-	 * Gebe eine Stringrepräsentation des Barcodes zurück. 
-	 * Dazu wird von jeder Ziffer im Barcode deren toString() Methode aufgerufen.
+	 * Gebe eine Stringrepräsentation des Barcodes zurück. Dazu wird von
+	 * jeder Ziffer im Barcode deren toString() Methode aufgerufen.
+	 * @return Stringrepräsentation des Barcodes.
 	 */
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
-		sb.append("STOP");
 		for(Ziffer z : this.ziffern){
 			sb.append(" ").append(z.toString());
 		}
@@ -53,7 +56,6 @@ public class Barcode {
 	}
 	
 	/**
-	 * 
 	 * @return int Länge des Barcodes in Anzahl an Ziffern.
 	 */
 	public int length() {
